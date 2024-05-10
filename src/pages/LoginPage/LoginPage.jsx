@@ -4,7 +4,7 @@ export default function LoginPage() {
   return (
     <>
       <Helmet>
-        <title>HelpConnect| Login</title>
+        <title>HelpConnect | Login</title>
       </Helmet>
 
       <p>login page</p>

@@ -4,7 +4,7 @@ export default function RegisterPage() {
   return (
     <>
       <Helmet>
-        <title>HelpConnect| Register</title>
+        <title>HelpConnect | Register</title>
       </Helmet>
 
       <p>register page</p>

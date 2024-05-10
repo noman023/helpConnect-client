@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet";
+import Slider from "../../components/Slider/Slider";
 
 export default function Home() {
   return (
@@ -7,7 +8,7 @@ export default function Home() {
         <title>HelpConnect | Home</title>
       </Helmet>
 
-      <p>home</p>
+      <Slider />
     </>
   );
 }

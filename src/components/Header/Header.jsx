@@ -10,7 +10,7 @@ export default function Header() {
     <Navbar fluid rounded>
       <Navbar.Brand href="/">
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          Help<span className="text-green-500">Connect</span>
+          Help<span className="text-green-600">Connect</span>
         </span>
       </Navbar.Brand>
 

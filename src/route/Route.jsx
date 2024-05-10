@@ -6,6 +6,7 @@ import NotFound from "../pages/NotFound/NotFound";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import AddVolunteerPost from "../pages/AddVolunteerPost/AddVolunteerPost";
+import VolunteerPostDetails from "../pages/VolunteerPostDetails/VolunteerPostDetails";
 
 const routes = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const routes = createBrowserRouter([
       {
         path: "/addPost",
         element: <AddVolunteerPost />,
+      },
+      {
+        path: "/postDetails",
+        element: <VolunteerPostDetails />,
       },
     ],
   },

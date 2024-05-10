@@ -9,6 +9,7 @@ import AddVolunteerPost from "../pages/AddVolunteerPost/AddVolunteerPost";
 import VolunteerPostDetails from "../pages/VolunteerPostDetails/VolunteerPostDetails";
 import AllVolunteerPost from "../pages/AllVolunteerPost/AllVolunteerPost";
 import MyPosts from "../pages/MyPosts/MyPosts";
+import MyVolunteerRequest from "../pages/MyVolunteerRequest/MyVolunteerRequest";
 
 const routes = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const routes = createBrowserRouter([
       {
         path: "/myPosts",
         element: <MyPosts />,
+      },
+      {
+        path: "/myRequests",
+        element: <MyVolunteerRequest />,
       },
     ],
   },

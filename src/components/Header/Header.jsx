@@ -31,27 +31,33 @@ export default function Header() {
 
           {user && (
             <>
-              <Dropdown.Item>Add Volunteer Post</Dropdown.Item>
-              <Dropdown.Item>Manage My Post</Dropdown.Item>
+              <Link to={"/addPost"}>
+                <Dropdown.Item>Add Volunteer Post</Dropdown.Item>
+              </Link>
+
+              <Link to={"/myPosts"}>
+                <Dropdown.Item>Manage My Post</Dropdown.Item>
+              </Link>
             </>
           )}
 
           <Dropdown.Divider />
 
           {user ? (
-            <Dropdown.Item>Sign out</Dropdown.Item>
+            <Dropdown.Item>Logout</Dropdown.Item>
           ) : (
             <Link to={"/login"}>
-              <Dropdown.Item>Sign In</Dropdown.Item>
+              <Dropdown.Item>Login</Dropdown.Item>
             </Link>
           )}
         </Dropdown>
+
         <Navbar.Toggle />
       </div>
 
       <Navbar.Collapse>
         <Navbar.Link href="/">Home</Navbar.Link>
-        <Navbar.Link href="/allPost">All Posts</Navbar.Link>
+        <Navbar.Link href="/allPost">Need Volunteer Posts</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );

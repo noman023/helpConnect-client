@@ -2,7 +2,6 @@ import { Button, Label, TextInput } from "flowbite-react";
 import { Link } from "react-router-dom";
 
 import Swal from "sweetalert2";
-import { BsGoogle } from "react-icons/bs";
 
 export default function Login() {
   const handleSubmit = (e) => {

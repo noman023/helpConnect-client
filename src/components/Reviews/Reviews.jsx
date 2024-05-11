@@ -8,7 +8,7 @@ export default function Reviews() {
     <>
       <SectionHead>What They're Talking About Us</SectionHead>
 
-      <Card className="max-w-sm my-10">
+      <Card className="max-w-sm my-10 border-green-600">
         <div className="flex gap-7">
           <div>
             <img

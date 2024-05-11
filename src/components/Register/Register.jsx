@@ -115,7 +115,7 @@ export default function Register() {
       </div>
 
       <p className="mt-2 text-center">
-        Don't have an account?{" "}
+        Already have an account?{" "}
         <Link to="/login" className="text-green-600 ">
           Login
         </Link>

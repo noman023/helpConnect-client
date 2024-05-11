@@ -4,6 +4,7 @@ import CardComponent from "../../components/Card/Card";
 import Reviews from "../../components/Reviews/Reviews";
 import SectionHead from "../../components/SectionHead/SectionHead";
 import NeedVolunteer from "../../components/NeedVolunteer/NeedVolunteer";
+import AboutUs from "../../components/AboutUs/AboutUs";
 
 export default function Home() {
   return (
@@ -15,6 +16,8 @@ export default function Home() {
       <Slider />
 
       <NeedVolunteer />
+
+      <AboutUs />
 
       <Reviews />
     </>

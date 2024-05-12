@@ -2,9 +2,25 @@ import { Badge, Button, Modal } from "flowbite-react";
 
 import cleaning from "../../assets/cleaning.jpg";
 import { useState } from "react";
+import BeVolunteer from "../BeVolunteer/BeVolunteer";
 
 export default function PostDetails() {
   const [openModal, setOpenModal] = useState(false);
+
+  const obj = {
+    thumbnail: "https://example.com/image1.jpg",
+    title: "Community Cleanup",
+    description:
+      "Join us in cleaning up the local park. Gloves and trash bags provided.",
+    category: "Environment",
+    location: "City Park",
+    volunteersNeeded: 10,
+    deadline: "2024-06-15",
+    organizer: {
+      name: "Community Cleaners",
+      email: "cleaners@example.com",
+    },
+  };
 
   return (
     <>
@@ -64,29 +80,9 @@ export default function PostDetails() {
 
       {/* modal to be a volunteer */}
       <Modal show={openModal} onClose={() => setOpenModal(false)}>
-        <Modal.Header>Terms of Service</Modal.Header>
         <Modal.Body>
-          <div className="space-y-6">
-            <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-              With less than a month to go before the European Union enacts new
-              consumer privacy laws for its citizens, companies around the world
-              are updating their terms of service agreements to comply.
-            </p>
-            <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-              The European Union’s General Data Protection Regulation (G.D.P.R.)
-              goes into effect on May 25 and is meant to ensure a common set of
-              data rights in the European Union. It requires organizations to
-              notify users as soon as possible of high-risk data breaches that
-              could personally affect them.
-            </p>
-          </div>
+          <BeVolunteer closeModal={setOpenModal} data={obj} />
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setOpenModal(false)}>Request</Button>
-          <Button color="gray" onClick={() => setOpenModal(false)}>
-            Cancel
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );

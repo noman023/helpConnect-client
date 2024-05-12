@@ -8,7 +8,7 @@ export default function MyPosts() {
         <title>HelpConnect | My Volunteer Posts</title>
       </Helmet>
 
-      <TableComponent />
+      <TableComponent tableUsedIn={"myPost"} />
     </div>
   );
 }

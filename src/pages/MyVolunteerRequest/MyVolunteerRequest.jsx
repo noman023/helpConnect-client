@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet";
+import TableComponent from "../../components/Table/Table";
 
 export default function MyVolunteerRequest() {
   return (
@@ -7,7 +8,7 @@ export default function MyVolunteerRequest() {
         <title>HelpConnect | My Volunteer Requests</title>
       </Helmet>
 
-      <p>MyVolunteerRequest page</p>
+      <TableComponent tableUsedIn={"myRequest"} />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet";
+import TableComponent from "../../components/Table/Table";
 
 export default function MyPosts() {
   return (
@@ -7,7 +8,7 @@ export default function MyPosts() {
         <title>HelpConnect | My Volunteer Posts</title>
       </Helmet>
 
-      <p>manage MyPosts page</p>
+      <TableComponent />
     </div>
   );
 }

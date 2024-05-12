@@ -79,7 +79,7 @@ export default function PostDetails() {
       </div>
 
       {/* modal to be a volunteer */}
-      <Modal show={openModal} onClose={() => setOpenModal(false)}>
+      <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
         <Modal.Body>
           <BeVolunteer closeModal={setOpenModal} data={obj} />
         </Modal.Body>

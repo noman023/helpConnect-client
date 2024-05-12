@@ -5,11 +5,16 @@ import { CiCalendarDate } from "react-icons/ci";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function AddVolunteerPost() {
+export default function AddOrUpdatePost({ closeModal, data }) {
   const [startDate, setStartDate] = useState(new Date());
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // close modal func will be there when updating data instead of adding a new one
+    if (closeModal) {
+      closeModal(false);
+    }
 
     const form = new FormData(e.currentTarget);
     const thumbnail = form.get("thumbnail");
@@ -31,7 +36,7 @@ export default function AddVolunteerPost() {
       volunteer,
       name,
       email,
-      startDate,
+      deadline: startDate,
     };
   };
 
@@ -47,6 +52,7 @@ export default function AddVolunteerPost() {
               <Label htmlFor="Thumbnail" value="Thumbnail" />
             </div>
             <TextInput
+              defaultValue={data && data.thumbnail} //data will be there when this component used for updating data
               id="Thumbnail"
               type="text"
               placeholder="Thumbnail image url"
@@ -60,6 +66,7 @@ export default function AddVolunteerPost() {
               <Label htmlFor="Title" value="Title" />
             </div>
             <TextInput
+              defaultValue={data && data.title}
               id="Title"
               type="text"
               name="title"
@@ -73,6 +80,7 @@ export default function AddVolunteerPost() {
               <Label htmlFor="Description" value="Description" />
             </div>
             <TextInput
+              defaultValue={data && data.description}
               id="Description"
               type="text"
               name="description"
@@ -86,6 +94,7 @@ export default function AddVolunteerPost() {
               <Label htmlFor="Category" value="Category" />
             </div>
             <TextInput
+              defaultValue={data && data.category}
               id="Category"
               type="text"
               name="category"
@@ -99,6 +108,7 @@ export default function AddVolunteerPost() {
               <Label htmlFor="Location" value="Location" />
             </div>
             <TextInput
+              defaultValue={data && data.location}
               id="Location"
               type="text"
               placeholder="ex: Mirpur, Dhaka"
@@ -114,6 +124,7 @@ export default function AddVolunteerPost() {
               <Label htmlFor="Volunteer" value="Volunteer Need" />
             </div>
             <TextInput
+              defaultValue={data && data.volunteersNeeded}
               id="Volunteer"
               type="text"
               name="volunteer"
@@ -128,7 +139,7 @@ export default function AddVolunteerPost() {
             </div>
 
             <DatePicker
-              selected={startDate}
+              selected={data ? data.deadline : startDate}
               showIcon
               onChange={(date) => setStartDate(date)}
               dateFormat="yyyy-MM-dd"
@@ -143,6 +154,7 @@ export default function AddVolunteerPost() {
               <Label htmlFor="Name" value="Organizer Name" />
             </div>
             <TextInput
+              defaultValue={data && data.organizer.name}
               id="Name"
               type="text"
               name="name"
@@ -156,6 +168,7 @@ export default function AddVolunteerPost() {
               <Label htmlFor="Email" value="Organizer Email" />
             </div>
             <TextInput
+              defaultValue={data && data.organizer.email}
               id="Email"
               type="text"
               name="email"
@@ -166,8 +179,9 @@ export default function AddVolunteerPost() {
         </div>
       </div>
 
+      {/* if there are data then show update else Add */}
       <Button type="submit" color={"success"} className="md:w-1/3 md:mx-auto">
-        Add Volunteer Need Post
+        {data ? "Update" : "Add"} Post
       </Button>
     </form>
   );

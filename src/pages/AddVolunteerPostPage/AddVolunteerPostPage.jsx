@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import AddVolunteerPost from "../../components/AddVolunteerPost/AddVolunteerPost";
+import AddVolunteerPost from "../../components/AddOrUpdatePost/AddOrUpdatePost";
 
 export default function AddVolunteerPostPage() {
   return (

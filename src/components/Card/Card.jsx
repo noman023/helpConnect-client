@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function CardComponent() {
   return (
-    <motion.button
+    <motion.div
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       transition={{ duration: 0.7, ease: "easeInOut" }}
@@ -29,6 +29,6 @@ export default function CardComponent() {
           <Button color="success">View Details</Button>
         </Link>
       </Card>
-    </motion.button>
+    </motion.div>
   );
 }

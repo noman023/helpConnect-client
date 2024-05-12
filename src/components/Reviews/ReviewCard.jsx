@@ -5,7 +5,7 @@ import cleaning from "../../assets/cleaning.jpg";
 
 export default function ReviewCard() {
   return (
-    <motion.button
+    <motion.div
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       transition={{ duration: 0.7, ease: "easeInOut" }}
@@ -44,6 +44,6 @@ export default function ReviewCard() {
           </Rating>
         </div>
       </Card>
-    </motion.button>
+    </motion.div>
   );
 }

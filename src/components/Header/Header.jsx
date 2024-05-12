@@ -2,9 +2,12 @@ import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { Link } from "react-router-dom";
 
 import userImg from "../../assets/user.png";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthContext";
+import SpinnerComponent from "../Spinner/Spinner";
 
 export default function Header() {
-  const user = true;
+  const { user, logOut, loading } = useContext(AuthContext);
 
   return (
     <Navbar fluid rounded>
@@ -18,13 +21,23 @@ export default function Header() {
         <Dropdown
           arrowIcon={false}
           inline
-          label={<Avatar alt="User settings" img={userImg} rounded />}
+          label={
+            loading ? (
+              <SpinnerComponent />
+            ) : (
+              <Avatar
+                alt="User settings"
+                img={user?.photoURL ? user.photoURL : userImg}
+                rounded
+              />
+            )
+          }
         >
           {user && (
             <Dropdown.Header>
-              <span className="block text-sm">Bonnie Green</span>
+              <span className="block text-sm">{user?.displayName}</span>
               <span className="block truncate text-sm font-medium">
-                name@flowbite.com
+                {user?.email}
               </span>
             </Dropdown.Header>
           )}
@@ -48,7 +61,7 @@ export default function Header() {
           <Dropdown.Divider />
 
           {user ? (
-            <Dropdown.Item>Logout</Dropdown.Item>
+            <Dropdown.Item onClick={() => logOut()}>Logout</Dropdown.Item>
           ) : (
             <Link to={"/login"}>
               <Dropdown.Item>Login</Dropdown.Item>

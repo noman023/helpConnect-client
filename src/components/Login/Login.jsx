@@ -1,6 +1,6 @@
 import { Button, Label, TextInput } from "flowbite-react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
@@ -8,6 +8,7 @@ import { AuthContext } from "../../providers/AuthContext";
 
 export default function Login() {
   const { logIn, loginWithGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,6 +23,8 @@ export default function Login() {
           icon: "success",
           title: "Logged in successfully",
         });
+
+        navigate("/");
       })
       .catch((err) => {
         Swal.fire({
@@ -38,6 +41,8 @@ export default function Login() {
           icon: "success",
           title: "Logged in successfully",
         });
+
+        navigate("/");
       })
       .catch((err) =>
         Swal.fire({

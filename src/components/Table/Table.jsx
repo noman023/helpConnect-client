@@ -84,7 +84,9 @@ export default function TableComponent({ tableUsedIn }) {
 
       {/* modal for update post data and this will be used when TableUsedIn = myPost*/}
       <Modal show={openModal} onClose={() => setOpenModal(false)}>
-        <Modal.Header>Update Post</Modal.Header>
+        <Modal.Header>
+          <p className="text-green-600 font-semibold">Update Post</p>
+        </Modal.Header>
 
         <Modal.Body>
           <AddOrUpdatePost closeModal={setOpenModal} data={obj} />

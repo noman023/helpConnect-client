@@ -4,7 +4,7 @@ import cleaning from "../../assets/cleaning.jpg";
 import { useState } from "react";
 
 export default function PostDetails() {
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <>
@@ -84,7 +84,7 @@ export default function PostDetails() {
         <Modal.Footer>
           <Button onClick={() => setOpenModal(false)}>Request</Button>
           <Button color="gray" onClick={() => setOpenModal(false)}>
-            Decline
+            Cancel
           </Button>
         </Modal.Footer>
       </Modal>

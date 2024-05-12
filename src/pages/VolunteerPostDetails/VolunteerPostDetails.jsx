@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet";
+import PostDetails from "../../components/PostDetails/PostDetails";
 
 export default function VolunteerPostDetails() {
   return (
@@ -7,7 +8,7 @@ export default function VolunteerPostDetails() {
         <title>HelpConnect | Volunteer Post Details</title>
       </Helmet>
 
-      <p>VolunteerPostDetails page</p>
+      <PostDetails />
     </div>
   );
 }

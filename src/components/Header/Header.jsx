@@ -38,6 +38,10 @@ export default function Header() {
               <Link to={"/myPosts"}>
                 <Dropdown.Item>Manage My Post</Dropdown.Item>
               </Link>
+
+              <Link to={"/myRequests"}>
+                <Dropdown.Item> My Volunteer Request Post</Dropdown.Item>
+              </Link>
             </>
           )}
 

@@ -1,12 +1,19 @@
 import { Button, Label, TextInput } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Swal from "sweetalert2";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useState } from "react";
+import { useContext, useState } from "react";
+
+import { AuthContext } from "../../providers/AuthContext";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../../firebase/firebase.config";
 
 export default function Register() {
   const [showPassowrd, setShowPassword] = useState(false);
+  const { createUser } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,13 +24,11 @@ export default function Register() {
     const email = form.get("email");
     const password = form.get("password");
 
-    console.log(name, photoUrl, email, password);
-
     //check if password has one uppercase and lowercase letter. and 6 letter long
     if (
       /[A-Z]/.test(password) &&
       /[a-z]/.test(password) &&
-      password.length === 6
+      password.length >= 6
     ) {
     } else {
       Swal.fire({
@@ -35,10 +40,28 @@ export default function Register() {
       return;
     }
 
-    Swal.fire({
-      icon: "success",
-      title: "Logged in successfully",
-    });
+    createUser(email, password)
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Logged in successfully",
+        });
+
+        // update user profile with name and photo url
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: photoUrl,
+        });
+
+        // navigate to home after register
+        navigate("/");
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "warning",
+          title: err.message,
+        });
+      });
   };
 
   return (

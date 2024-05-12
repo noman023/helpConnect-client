@@ -10,7 +10,7 @@ import { FaTableList } from "react-icons/fa6";
 
 export default function AllVolunteerPost() {
   const [searchText, setsearchText] = useState("");
-  const [isTableLayout, setIsTableLayout] = useState(true);
+  const [isTableLayout, setIsTableLayout] = useState(false);
 
   return (
     <div>

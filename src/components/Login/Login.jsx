@@ -1,9 +1,14 @@
 import { Button, Label, TextInput } from "flowbite-react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 
+import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../providers/AuthContext";
 
 export default function Login() {
+  const { logIn, loginWithGoogle } = useContext(AuthContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -11,17 +16,35 @@ export default function Login() {
     const email = form.get("email");
     const password = form.get("password");
 
-    Swal.fire({
-      icon: "success",
-      title: "Logged in successfully",
-    });
+    logIn(email, password)
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Logged in successfully",
+        });
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "warning",
+          title: err.message,
+        });
+      });
   };
 
   const handleGoogleLogin = () => {
-    Swal.fire({
-      icon: "success",
-      title: "Logged in successfully",
-    });
+    loginWithGoogle()
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Logged in successfully",
+        });
+      })
+      .catch((err) =>
+        Swal.fire({
+          icon: "warning",
+          title: err.message,
+        })
+      );
   };
 
   return (
@@ -69,8 +92,9 @@ export default function Login() {
       </Button>
 
       <p className="text-lg text-black font-bold text-center">Or</p>
-      <Button onClick={handleGoogleLogin} type="button" className="bg-red-600 ">
+      <Button onClick={handleGoogleLogin} type="button" color={"failure"}>
         Login with Google
+        <FcGoogle className="text-lg ml-2" />
       </Button>
     </form>
   );

@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import SpinnerComponent from "../Spinner/Spinner";
 import axios from "axios";
+import baseUrl from "../../baseUrl";
 
 export default function NeedVolunteer() {
   const { data, isPending, status } = useQuery({
     queryKey: ["allPost"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/posts");
+      const res = await axios.get(`${baseUrl}/posts`);
 
       return res.data;
     },

@@ -4,12 +4,13 @@ import SectionHead from "../SectionHead/SectionHead";
 import ReviewCard from "./ReviewCard";
 import SpinnerComponent from "../Spinner/Spinner";
 import axios from "axios";
+import baseUrl from "../../baseUrl";
 
 export default function Reviews() {
   const { data, isPending } = useQuery({
     queryKey: ["reviews"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/reviews");
+      const res = await axios.get(`${baseUrl}/reviews`);
 
       return res.data;
     },

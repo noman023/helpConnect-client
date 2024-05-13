@@ -1,5 +1,5 @@
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import userImg from "../../assets/user.png";
 import { useContext } from "react";
@@ -9,15 +9,19 @@ import Swal from "sweetalert2";
 
 export default function Header() {
   const { user, logOut, loading } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
     logOut()
-      .then(() =>
+      .then(() => {
         Swal.fire({
           icon: "success",
           title: "LogOut successfully",
-        })
-      )
+        });
+
+        // navigate to home after logout
+        navigate("/");
+      })
       .catch((err) => {
         Swal.fire({
           icon: "warning",

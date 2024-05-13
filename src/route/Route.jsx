@@ -10,6 +10,7 @@ import AllVolunteerPost from "../pages/AllVolunteerPost/AllVolunteerPost";
 import MyPosts from "../pages/MyPosts/MyPosts";
 import MyVolunteerRequest from "../pages/MyVolunteerRequest/MyVolunteerRequest";
 import AddVolunteerPostPage from "../pages/AddVolunteerPostPage/AddVolunteerPostPage";
+import PrivateRoute from "../pages/PrivateRoute/PrivateRoute";
 
 const routes = createBrowserRouter([
   {
@@ -31,23 +32,43 @@ const routes = createBrowserRouter([
       },
       {
         path: "/allPost",
-        element: <AllVolunteerPost />,
+        element: (
+          <PrivateRoute>
+            <AllVolunteerPost />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "/addPost",
-        element: <AddVolunteerPostPage />,
+        element: (
+          <PrivateRoute>
+            <AddVolunteerPostPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/postDetails/:id",
-        element: <VolunteerPostDetails />,
+        element: (
+          <PrivateRoute>
+            <VolunteerPostDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/myPosts",
-        element: <MyPosts />,
+        element: (
+          <PrivateRoute>
+            <MyPosts />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/myRequests",
-        element: <MyVolunteerRequest />,
+        element: (
+          <PrivateRoute>
+            <MyVolunteerRequest />
+          </PrivateRoute>
+        ),
       },
     ],
   },

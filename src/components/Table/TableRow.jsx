@@ -5,6 +5,7 @@ import AddOrUpdatePost from "../AddOrUpdatePost/AddOrUpdatePost";
 import Swal from "sweetalert2";
 import axios from "axios";
 import baseUrl from "../../baseUrl";
+import { Link } from "react-router-dom";
 
 export default function TableRow({ data, tableUsedIn }) {
   const [openModal, setOpenModal] = useState(false);
@@ -67,7 +68,7 @@ export default function TableRow({ data, tableUsedIn }) {
   } else {
     buttons = (
       <>
-        <Link to={`/postDetails/2`}>
+        <Link to={`/postDetails/${data._id}`}>
           <Button color={"success"}>View Details</Button>
         </Link>
       </>

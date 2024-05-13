@@ -68,7 +68,7 @@ export default function AllVolunteerPost() {
         <>
           {/* if isTableLayout true then show data using table else using card */}
           {isTableLayout ? (
-            <TableComponent tableUsedIn={"allPost"} />
+            <TableComponent tableUsedIn={"allPost"} data={data} />
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 my-10">
               {data.map((post) => (

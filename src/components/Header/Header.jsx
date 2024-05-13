@@ -5,9 +5,26 @@ import userImg from "../../assets/user.png";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthContext";
 import SpinnerComponent from "../Spinner/Spinner";
+import Swal from "sweetalert2";
 
 export default function Header() {
   const { user, logOut, loading } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() =>
+        Swal.fire({
+          icon: "success",
+          title: "LogOut successfully",
+        })
+      )
+      .catch((err) => {
+        Swal.fire({
+          icon: "warning",
+          title: err.message,
+        });
+      });
+  };
 
   return (
     <Navbar fluid rounded>
@@ -27,7 +44,7 @@ export default function Header() {
             ) : (
               <Avatar
                 alt="User settings"
-                img={user?.photoURL ? user.photoURL : userImg}
+                img={user?.photoURL ? `${user.photoURL}` : userImg}
                 rounded
               />
             )
@@ -61,7 +78,7 @@ export default function Header() {
           <Dropdown.Divider />
 
           {user ? (
-            <Dropdown.Item onClick={() => logOut()}>Logout</Dropdown.Item>
+            <Dropdown.Item onClick={handleLogOut}>Logout</Dropdown.Item>
           ) : (
             <Link to={"/login"}>
               <Dropdown.Item>Login</Dropdown.Item>

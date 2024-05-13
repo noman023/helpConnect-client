@@ -27,9 +27,7 @@ export default function NeedVolunteer() {
       <SectionHead>Where Your Help Needed</SectionHead>
 
       {isPending ? (
-        <div className="text-center mt-10">
-          <SpinnerComponent />
-        </div>
+        <SpinnerComponent />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 my-10">
           {posts.map((post) => (

@@ -21,9 +21,7 @@ export default function Reviews() {
       <SectionHead>What They're Talking About Us</SectionHead>
 
       {isPending ? (
-        <div className="text-center mt-10">
-          <SpinnerComponent />
-        </div>
+        <SpinnerComponent />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-10">
           {data.map((review, idx) => (

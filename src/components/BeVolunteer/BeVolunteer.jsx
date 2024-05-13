@@ -1,6 +1,16 @@
 import { Button, Label, TextInput } from "flowbite-react";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthContext";
+import axios from "axios";
+import baseUrl from "../../baseUrl";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function BeVolunteer({ closeModal, data }) {
+  const { user } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -29,14 +39,35 @@ export default function BeVolunteer({ closeModal, data }) {
       category,
       location,
       volunteer,
-      name,
-      email,
+      organizer: {
+        name,
+        email,
+      },
       deadline,
       volunteerName,
       volunteerEmail,
       suggestion,
       status,
     };
+
+    axios
+      .post(`${baseUrl}/beVolunteer`, postInfo)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            icon: "success",
+            title: "your volunteer request sent successfully",
+          });
+        }
+
+        navigate("/");
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "warning",
+          title: err.message,
+        });
+      });
   };
 
   return (
@@ -197,11 +228,13 @@ export default function BeVolunteer({ closeModal, data }) {
               <Label htmlFor="VolunteerName" value="Volunteer Name" />
             </div>
             <TextInput
+              defaultValue={user && user.displayName}
               id="VolunteerName"
               type="text"
               name="volunteerName"
               placeholder="Volunteer Name"
               required
+              readOnly
             />
           </div>
 
@@ -210,11 +243,13 @@ export default function BeVolunteer({ closeModal, data }) {
               <Label htmlFor="VolunteerEmail" value="Volunteer Email" />
             </div>
             <TextInput
+              defaultValue={user && user.email}
               id="VolunteerEmail"
               type="email"
               name="volunteerEmail"
               placeholder="Volunteer Email"
               required
+              readOnly
             />
           </div>
         </div>

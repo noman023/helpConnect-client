@@ -146,7 +146,7 @@ export default function BeVolunteer({ closeModal, data }) {
             </div>
 
             <TextInput
-              defaultValue={data && data.volunteersNeeded}
+              defaultValue={data && data.deadline}
               id="Deadline"
               type="text"
               name="deadline"

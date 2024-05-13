@@ -5,7 +5,7 @@ import AddOrUpdatePost from "../AddOrUpdatePost/AddOrUpdatePost";
 import { Link } from "react-router-dom";
 import TableRow from "./TableRow";
 
-export default function TableComponent({ tableUsedIn }) {
+export default function TableComponent({ tableUsedIn, data }) {
   const [openModal, setOpenModal] = useState(false);
 
   const obj = {
@@ -77,7 +77,15 @@ export default function TableComponent({ tableUsedIn }) {
           </Table.Head>
 
           <Table.Body className="divide-y">
-            <TableRow buttons={buttons} data={obj} />
+            {data?.length === 0 && (
+              <p className="text-red-600 font-bold text-right mt-6">
+                There is no data.
+              </p>
+            )}
+
+            {data?.map((post) => (
+              <TableRow key={post._id} buttons={buttons} data={post} />
+            ))}
           </Table.Body>
         </Table>
       </div>

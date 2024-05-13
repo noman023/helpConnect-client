@@ -54,7 +54,7 @@ export default function AddOrUpdatePost({ closeModal, data }) {
       axios
         .post(`${baseUrl}/addPost`, postInfo)
         .then((res) => {
-          if (res.data.acknowledged) {
+          if (res.data.insertedId) {
             Swal.fire({
               icon: "success",
               title: "your post has been added successfully",
@@ -73,7 +73,7 @@ export default function AddOrUpdatePost({ closeModal, data }) {
       axios
         .put(`${baseUrl}/updatePost/${data._id}`, postInfo)
         .then((res) => {
-          if (res.data.acknowledged) {
+          if (res.data.modifiedCount === 1) {
             Swal.fire({
               icon: "success",
               title: "your post has been updated successfully",

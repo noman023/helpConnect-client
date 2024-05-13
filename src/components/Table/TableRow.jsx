@@ -2,13 +2,38 @@ import { Button, Modal, Table } from "flowbite-react";
 import { useState } from "react";
 
 import AddOrUpdatePost from "../AddOrUpdatePost/AddOrUpdatePost";
+import Swal from "sweetalert2";
+import axios from "axios";
+import baseUrl from "../../baseUrl";
 
 export default function TableRow({ data, tableUsedIn }) {
   const [openModal, setOpenModal] = useState(false);
 
   const hanldeDelete = () => {
-    console.log("delete button clicked");
-    console.log(data._id);
+    Swal.fire({
+      title: "Do you want to delete this post permanently?",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`${baseUrl}/post/${data._id}`)
+          .then((res) => {
+            if (res.data.deletedCount === 1) {
+              Swal.fire({
+                icon: "success",
+                title: "your post has been deleted successfully",
+              });
+            }
+          })
+          .catch((err) => {
+            Swal.fire({
+              icon: "warning",
+              title: err.message,
+            });
+          });
+      }
+    });
   };
 
   const hanldeCancel = () => {

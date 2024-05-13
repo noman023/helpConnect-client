@@ -1,55 +1,8 @@
-import { Table, Button, Modal } from "flowbite-react";
-import { useState } from "react";
+import { Table } from "flowbite-react";
 
-import AddOrUpdatePost from "../AddOrUpdatePost/AddOrUpdatePost";
-import { Link } from "react-router-dom";
 import TableRow from "./TableRow";
 
 export default function TableComponent({ tableUsedIn, data }) {
-  const [openModal, setOpenModal] = useState(false);
-
-  const hanldeDelete = () => {
-    console.log("delete button clicked");
-  };
-
-  const hanldeCancel = () => {
-    console.log("Cancel button clicked");
-  };
-
-  let buttons;
-
-  // tableUsedIn indicate where this table component being used
-  // button varies by tableUsedIn
-  if (tableUsedIn === "myPost") {
-    buttons = (
-      <>
-        <Button color={"purple"} onClick={() => setOpenModal(true)}>
-          Update
-        </Button>
-
-        <Button color={"failure"} onClick={hanldeDelete}>
-          Delete
-        </Button>
-      </>
-    );
-  } else if (tableUsedIn === "myRequest") {
-    buttons = (
-      <>
-        <Button color={"failure"} onClick={hanldeCancel}>
-          Cancel
-        </Button>
-      </>
-    );
-  } else {
-    buttons = (
-      <>
-        <Link to={`/postDetails/2`}>
-          <Button color={"success"}>View Details</Button>
-        </Link>
-      </>
-    );
-  }
-
   return (
     <>
       <div className="overflow-x-auto my-10">
@@ -69,22 +22,11 @@ export default function TableComponent({ tableUsedIn, data }) {
             )}
 
             {data?.map((post) => (
-              <TableRow key={post._id} buttons={buttons} data={post} />
+              <TableRow key={post._id} data={post} tableUsedIn={tableUsedIn} />
             ))}
           </Table.Body>
         </Table>
       </div>
-
-      {/* modal for update post data and this will be used when TableUsedIn = myPost*/}
-      <Modal show={openModal} onClose={() => setOpenModal(false)}>
-        <Modal.Header>
-          <p className="text-green-600 font-semibold">Update Post</p>
-        </Modal.Header>
-
-        <Modal.Body>
-          <AddOrUpdatePost closeModal={setOpenModal} data={data} />
-        </Modal.Body>
-      </Modal>
     </>
   );
 }

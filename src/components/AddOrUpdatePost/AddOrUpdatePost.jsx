@@ -41,7 +41,7 @@ export default function AddOrUpdatePost({ closeModal, data }) {
       description,
       category,
       location,
-      volunteer,
+      volunteersNeeded: volunteer,
       deadline: startDate.toISOString().split("T")[0], // extract only data
       organizer: {
         name,
@@ -57,7 +57,7 @@ export default function AddOrUpdatePost({ closeModal, data }) {
           if (res.data.acknowledged) {
             Swal.fire({
               icon: "success",
-              title: "your data has been added successfully",
+              title: "your post has been added successfully",
             });
           }
 
@@ -69,7 +69,25 @@ export default function AddOrUpdatePost({ closeModal, data }) {
             title: err.message,
           });
         });
-    }
+    } else
+      axios
+        .put(`${baseUrl}/updatePost/${data._id}`, postInfo)
+        .then((res) => {
+          if (res.data.acknowledged) {
+            Swal.fire({
+              icon: "success",
+              title: "your post has been updated successfully",
+            });
+          }
+
+          navigate("/");
+        })
+        .catch((err) => {
+          Swal.fire({
+            icon: "warning",
+            title: err.message,
+          });
+        });
   };
 
   return (

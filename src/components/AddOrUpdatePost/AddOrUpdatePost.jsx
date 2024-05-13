@@ -1,12 +1,20 @@
 import { Button, Label, TextInput } from "flowbite-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { CiCalendarDate } from "react-icons/ci";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
+import baseUrl from "../../baseUrl";
+import { AuthContext } from "../../providers/AuthContext";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function AddOrUpdatePost({ closeModal, data }) {
   const [startDate, setStartDate] = useState(new Date());
+  const { user } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,10 +42,34 @@ export default function AddOrUpdatePost({ closeModal, data }) {
       category,
       location,
       volunteer,
-      name,
-      email,
-      deadline: startDate,
+      deadline: startDate.toISOString().split("T")[0], // extract only data
+      organizer: {
+        name,
+        email,
+      },
     };
+
+    // if no data then this component used for adding data so hitting adding data url
+    if (!data) {
+      axios
+        .post(`${baseUrl}/addPost`, postInfo)
+        .then((res) => {
+          if (res.data.acknowledged) {
+            Swal.fire({
+              icon: "success",
+              title: "your data has been added successfully",
+            });
+          }
+
+          navigate("/");
+        })
+        .catch((err) => {
+          Swal.fire({
+            icon: "warning",
+            title: err.message,
+          });
+        });
+    }
   };
 
   return (
@@ -154,12 +186,13 @@ export default function AddOrUpdatePost({ closeModal, data }) {
               <Label htmlFor="Name" value="Organizer Name" />
             </div>
             <TextInput
-              defaultValue={data && data.organizer.name}
+              defaultValue={user && user.displayName}
               id="Name"
               type="text"
               name="name"
               placeholder="Organizer Name"
               required
+              readOnly
             />
           </div>
 
@@ -168,12 +201,13 @@ export default function AddOrUpdatePost({ closeModal, data }) {
               <Label htmlFor="Email" value="Organizer Email" />
             </div>
             <TextInput
-              defaultValue={data && data.organizer.email}
+              defaultValue={user && user.email}
               id="Email"
               type="text"
               name="email"
               placeholder="Organizer Email"
               required
+              readOnly
             />
           </div>
         </div>

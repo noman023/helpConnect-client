@@ -8,21 +8,6 @@ import TableRow from "./TableRow";
 export default function TableComponent({ tableUsedIn, data }) {
   const [openModal, setOpenModal] = useState(false);
 
-  const obj = {
-    thumbnail: "https://example.com/image1.jpg",
-    title: "Community Cleanup",
-    description:
-      "Join us in cleaning up the local park. Gloves and trash bags provided.",
-    category: "Environment",
-    location: "City Park",
-    volunteersNeeded: 10,
-    deadline: "2024-06-15",
-    organizer: {
-      name: "Community Cleaners",
-      email: "cleaners@example.com",
-    },
-  };
-
   const hanldeDelete = () => {
     console.log("delete button clicked");
   };
@@ -97,7 +82,7 @@ export default function TableComponent({ tableUsedIn, data }) {
         </Modal.Header>
 
         <Modal.Body>
-          <AddOrUpdatePost closeModal={setOpenModal} data={obj} />
+          <AddOrUpdatePost closeModal={setOpenModal} data={data} />
         </Modal.Body>
       </Modal>
     </>

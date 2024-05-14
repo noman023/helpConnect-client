@@ -14,6 +14,7 @@ import SpinnerComponent from "../../components/Spinner/Spinner";
 
 export default function AllVolunteerPost() {
   const [searchText, setsearchText] = useState("");
+  // console.log(searchText);
   const [isTableLayout, setIsTableLayout] = useState(false);
 
   const { data, status } = useQuery({
@@ -24,6 +25,16 @@ export default function AllVolunteerPost() {
       return res.data;
     },
   });
+
+  let filteredPosts;
+  // Filter posts based on search text
+  if (status === "success" && searchText) {
+    filteredPosts = data.filter((post) =>
+      post.title.toLowerCase().includes(searchText.toLowerCase())
+    );
+  } else {
+    filteredPosts = data; //if no search text then all data will be filteredPosts
+  }
 
   return (
     <div>
@@ -63,15 +74,14 @@ export default function AllVolunteerPost() {
 
       {status === "pending" && <SpinnerComponent />}
 
-      {/* if data is there */}
+      {/* if data is there then render */}
       {status === "success" && (
         <>
-          {/* if isTableLayout true then show data using table else using card */}
           {isTableLayout ? (
-            <TableComponent tableUsedIn={"allPost"} data={data} />
+            <TableComponent tableUsedIn={"allPost"} data={filteredPosts} />
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 my-10">
-              {data.map((post) => (
+              {filteredPosts.map((post) => (
                 <CardComponent key={post._id} data={post} />
               ))}
             </div>

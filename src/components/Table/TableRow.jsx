@@ -5,10 +5,11 @@ import AddOrUpdatePost from "../AddOrUpdatePost/AddOrUpdatePost";
 import Swal from "sweetalert2";
 import axios from "axios";
 import baseUrl from "../../baseUrl";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function TableRow({ data, tableUsedIn }) {
   const [openModal, setOpenModal] = useState(false);
+  const navigate = useNavigate();
 
   const hanldeDelete = () => {
     Swal.fire({
@@ -26,6 +27,8 @@ export default function TableRow({ data, tableUsedIn }) {
                 title: "your post has been deleted successfully",
               });
             }
+
+            navigate("/");
           })
           .catch((err) => {
             Swal.fire({
@@ -38,7 +41,32 @@ export default function TableRow({ data, tableUsedIn }) {
   };
 
   const hanldeCancel = () => {
-    console.log("Cancel button clicked");
+    Swal.fire({
+      title: "Do you want to delete this post permanently?",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`${baseUrl}/myRequests/${data._id}`)
+          .then((res) => {
+            if (res.data.deletedCount === 1) {
+              Swal.fire({
+                icon: "success",
+                title: "your post has been deleted successfully",
+              });
+            }
+
+            navigate("/");
+          })
+          .catch((err) => {
+            Swal.fire({
+              icon: "warning",
+              title: err.message,
+            });
+          });
+      }
+    });
   };
 
   let buttons;

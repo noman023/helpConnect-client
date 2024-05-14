@@ -50,6 +50,7 @@ export default function BeVolunteer({ closeModal, data }) {
       status,
     };
 
+    // be volunteer for the post
     axios
       .post(`${baseUrl}/beVolunteer`, postInfo)
       .then((res) => {
@@ -68,6 +69,9 @@ export default function BeVolunteer({ closeModal, data }) {
           title: err.message,
         });
       });
+
+    // update post's volunteersNeeded count
+    axios.patch(`${baseUrl}/beVolunteer/${data._id}`);
   };
 
   return (

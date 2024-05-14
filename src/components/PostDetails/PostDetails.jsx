@@ -54,7 +54,11 @@ export default function PostDetails({ data }) {
 
           <p>
             <span className="text-green-600 font-bold">Volunteers need :</span>{" "}
-            {volunteersNeeded}
+            {volunteersNeeded == 0 ? (
+              <span className="text-red-500">Does not need volunteers</span>
+            ) : (
+              volunteersNeeded
+            )}
           </p>
 
           <div className="flex flex-col md:flex-row gap-2">
@@ -66,7 +70,11 @@ export default function PostDetails({ data }) {
             </div>
           </div>
 
-          <Button onClick={() => setOpenModal(true)} color={"success"}>
+          <Button
+            onClick={() => setOpenModal(true)}
+            color={"success"}
+            disabled={volunteersNeeded == 0}
+          >
             Be a Volunteer
           </Button>
         </div>

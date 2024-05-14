@@ -1,8 +1,11 @@
-# React + Vite
+# HelpConnect
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+HelpConnect is a volunteer management application. where user can
 
-Currently, two official plugins are available:
+- posted a need voluntneer post
+- update or delete their own post
+- be a volunteer for other user's post
+- cancel be a volunteer request
+- login with email and password or using google account
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Live [link](https://assignment11-c9a59.web.app/)

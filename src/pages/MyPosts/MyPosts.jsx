@@ -8,11 +8,14 @@ import baseUrl from "../../baseUrl";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthContext";
 import SpinnerComponent from "../../components/Spinner/Spinner";
+import { TextInput } from "flowbite-react";
+import { useState } from "react";
 
 export default function MyPosts() {
+  const [searchText, setsearchText] = useState("");
   const { user } = useContext(AuthContext);
 
-  const { data, isPending } = useQuery({
+  const { data, isPending, status } = useQuery({
     queryKey: ["myPosts"],
     queryFn: async () => {
       const res = await axios.get(`${baseUrl}/myPosts?email=${user.email}`);
@@ -21,16 +24,35 @@ export default function MyPosts() {
     },
   });
 
+  let filteredPosts;
+  // Filter posts based on search text
+  if (status === "success" && searchText) {
+    filteredPosts = data.filter((post) =>
+      post.title.toLowerCase().includes(searchText.toLowerCase())
+    );
+  } else {
+    filteredPosts = data; //if no search text then all data will be filteredPosts
+  }
+
   return (
     <div>
       <Helmet>
         <title>HelpConnect | My Volunteer Posts</title>
       </Helmet>
 
+      {/* search text */}
+      <div className="md:w-1/3 mx-auto mt-5">
+        <TextInput
+          type="text"
+          placeholder="Search by Post Title"
+          onChange={(e) => setsearchText(e.target.value)}
+        />
+      </div>
+
       {isPending ? (
         <SpinnerComponent />
       ) : (
-        <TableComponent tableUsedIn={"myPost"} data={data} />
+        <TableComponent tableUsedIn={"myPost"} data={filteredPosts} />
       )}
     </div>
   );
